@@ -1,0 +1,426 @@
+; vim:ft=dosini
+
+
+
+[colors]
+## Material Colors
+red = #e53935
+pink = #d81b60
+purple = #8e24aa
+deep-purple = #5e35b1
+indigo = #3949ab
+blue = #1e88e5
+light-blue = #039be5
+cyan = #00acc1
+teal = #00897b
+green = #43a047
+light-green = #7cb342
+lime = #c0ca33
+yellow = #fdd835
+amber = #ffb300
+orange = #fb8c00
+deep-orange = #f4511e
+brown = #6d4c41
+grey = #757575
+blue-gray = #546e7a
+
+fg = ${xrdb:color7}
+modfg = ${xrdb:color3}
+alt = ${xrdb:color2}
+alt2 = ${xrdb:color1}
+bg = ${xrdb:color0}
+
+
+[bar/i3wmthemer_bar]
+width = 100%
+height = 27
+radius = 0
+fixed-center = false
+
+background = #991c1c22
+foreground = #d9d6ca
+
+line-size = 3
+line-color =
+
+border-size = 0
+border-color =
+
+padding-left = 0
+padding-right mt-connected-foreground = #1c1c22
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = "Source Code Pro Semibold:size=10;1"
+font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
+font-2 = "Font Awesome 5 Brands:size=10;1"
+
+modules-left = wlan eth memory cpu temperature pulseaudio
+modules-center = i3 keyboard
+modules-right = battery filesystem popup-calendar powermenu
+
+tray-position = left
+tray-padding = 2px
+tray_output = ${env:MONITOR:}
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+monitor = ${env:MONITOR:}
+
+## Required to use hideIt with polybar
+# disable as hideIt is not working with dual screen
+# override-redirect = true
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/temperature]
+type = internal/temperature
+
+interval = 4
+thermal-zone = 1
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+base-temperature = 20
+warn-temperature = 85
+label-warn-padding = 2
+label-warn = %temperature-c%
+label-warn-background = #f00
+label-warn-foreground = #fff
+
+
+[module/keyboard]
+type = internal/xkeyboard
+format = <label-indicator>
+label-indicator = %name%
+label-indicator-padding = 2
+label-indicator-background = #8139e8
+
+
+[module/filesystem]
+format-mounted-foreground = #cccccc
+format-mounted-background = #5c828d
+format-mounted-padding = 2
+interval = 30
+type = internal/fs
+; Mountpoints to display
+mount-0 = /
+fixed-values = true
+spacing = 4
+format-mounted = <label-mounted>
+label-mounted = %mountpoint%: %percentage_free%% of %total%
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/memory]
+format-foreground = #cccccc
+format-background = #5c828d
+format-padding = 2
+type = internal/memory
+interval = 5
+format = <ramp-used> <label>
+label = RAM %percentage_used%% used
+bar-used-indicator =
+bar-used-width = 50
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+; Only applies if <ramp-used> is used
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+; Only applies if <ramp-free> is used
+ramp-free-0 = ▁
+ramp-free-1 = ▂
+ramp-free-2 = ▃
+ramp-free-3 = ▄
+ramp-free-4 = ▅
+ramp-free-5 = ▆
+ramp-free-6 = ▇
+ramp-free-7 = █
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+interval = 2
+format-online = <icon-prev> <icon-stop> <toggle> <icon-next>  <icon-repeat> <icon-random> <label-song>
+format-offline = <label-offline>
+
+label-song = 𝄞 %artist% - %title%
+label-offline = "mpd is offline"
+icon-play = ⏵
+icon-pause = ⏸
+icon-stop = ⏹
+icon-prev = ⏮
+icon-next = ⏭
+icon-seekb = ⏪
+icon-seekf = ⏩
+icon-random = 🔀
+icon-repeat = 🔁
+icon-repeatone = 🔂
+icon-single = 🔂
+icon-consume = ✀
+
+;toggle-on-foreground = #ff
+;toggle-off-foreground = #55
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/cpu]
+type = internal/cpu
+; Seconds to sleep between updates
+; Default: 1
+interval = 1
+; Available tags:
+;   <label> (default)
+;   <bar-load>
+;   <ramp-load>
+;   <ramp-coreload>
+format = <label> <ramp-coreload>
+
+; Available tokens:
+;   %percentage% (default) - total cpu load averaged over all cores
+;   %percentage-sum% - Cumulative load on all cores
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = CPU : 
+
+; Spacing between individual per-core ramps
+ramp-coreload-spacing = 2
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1b.0.analog-stereo
+use-ui-max = true
+format-volume = <bar-volume> <label-volume>
+format-muted = <bar-volume> <label-muted>
+
+bar-volume-width = 10
+bar-volume-indicator = |
+bar-volume-fill = -
+bar-volume-empty = -
+label-muted = muted
+label-muted-foreground = #666
+; backlight module does not seem to work right
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <label> <bar>
+label = %percentage%%
+bar-width = 10
+bar-indicator = |
+bar-fill = -
+bar-empty = -
+poll-interval = 5
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/battery]
+type = internal/battery
+full-at = 99
+battery = BAT0
+adapter = AC
+poll-interval = 5
+
+time-format = %H:%M
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+label-charging = Charging %percentage%%
+label-discharging = Discharging %percentage%%
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = #de0037
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
+ramp-capacity-10 = 
+; Framerate in milliseconds
+; animation-discharging-framerate = 500
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/i3]
+type = internal/i3
+enable-click = true
+index-sort = true
+wrapping-scroll = false
+enable-scroll = true
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+format = <label-state> <label-mode>
+;
+label-mode = %mode%
+label-mode-padding = 2
+
+label-focused = %index%
+label-focused-foreground = #ffffff
+label-focused-background = #11000000
+label-focused-underline = #5c828d
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+label-visible = %index%
+label-visible-underline = #FF0000
+label-visible-padding = 2
+
+label-urgent = %index%
+label-urgent-foreground = #ffffff
+label-urgent-background = #77DA4646
+label-urgent-padding = 2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-foreground = #1c1c22
+format-connected-background = #5c828d
+format-connected-padding = 2
+label-connected = %essid% %downspeed:9%
+
+;format-disconnected = %{A:nm-connection-editor&:}disconnected%{A}v
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = #1c1c22
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/eth]
+type = internal/network
+interface = eth0
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-padding = 2
+format-connected-foreground = #1c1c22
+format-connected-background = #5c828d
+format-connected-prefix = "eth: "
+format-connected-prefix-foreground = #1c1c22
+label-connected = %local_ip% %downspeed:9%
+
+format-disconnected =
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/popup-calendar]
+type = custom/script
+exec = date +" %Y-%m-%d %a %I:%M:%S %p %Z"
+interval = 5
+click-left = gsimplecal
+format-prefix = 
+format-foreground = #cccccc
+format-background = #5c828d
+format-padding = 2
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %Y-%m-%d"
+time = %I:%M:%S %p %Z
+
+format-prefix = 
+format-foreground = #1c1c22
+format-background = #5c828d
+format-padding = 2
+
+label = %date% %time%
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = #5c828d
+label-close =  cancel
+label-close-foreground = #5c828d
+label-separator = |
+label-separator-foreground = #5c828d
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+menu-0-2 = log off
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = reboot
+
+menu-2-0 = power off
+menu-2-0-exec = poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+menu-3-0 = log off
+menu-3-0-exec = pkill -KILL -u $USER
+menu-3-1 = cancel
+menu-3-1-exec = menu-open-0
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[settings]
+screenchange-reload = true
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
