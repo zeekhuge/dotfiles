@@ -25,7 +25,11 @@ bindsym XF86ScreenSaver exec --no-startup-id $lock_command
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
-bindsym XF86AudioNext exec --no-startup-id ~/bin/audio-player-controller
+
+# Cmus control
+bindsym XF86AudioNext exec --no-startup-id cmus-remote --next
+bindsym XF86AudioPrev exec --no-startup-id cmus-remote --prev
+bindsym XF86AudioPlay exec --no-startup-id cmus-remote --pause
 
 bindsym $mod+u border none
 bindsym $mod+y border pixel 5
