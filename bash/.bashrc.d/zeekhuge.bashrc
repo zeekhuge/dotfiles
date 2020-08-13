@@ -67,6 +67,8 @@ PATH="${PATH}:${JAVA_HOME}/bin:${JRE_HOME}/bin"
 PATH="${PATH}:/home/zeekhuge/bin"
 PATH=$ANDROID_PLATFORM_TOOLS:$PATH
 PATH="/home/zeekhuge/.npm-global/bin":$PATH
+PATH="${PATH}:/home/zeekhuge/flutter-installed/flutter/bin/"
+PATH="${PATH}:/home/zeekhuge/flutter-installed/flutter/bin/cache/dart-sdk/bin/"
 export PATH
 
 #############################################################################################################
