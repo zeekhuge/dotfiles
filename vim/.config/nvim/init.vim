@@ -1,61 +1,74 @@
+" Neovim config
+" Author: Zubeen Tolani <contact@zeekhuge.me>
+
+" TO Install vim-plug, do the following:
+"
+"sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+"       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+"
+
 " to start vim-plug plugin manager
 call plug#begin('~/.config/nvim/bundle/')
 
-Plug '~/.vim/bundle/ale'
-Plug '~/.vim/bundle/asyncrun.vim'
+"Plug '~/.vim/bundle/ale'
+Plug 'skywind3000/asyncrun.vim'
 
 " we probably do not want this, we already have YCM
-Plug '~/.vim/bundle/AutoComplPop'
+"Plug '~/.vim/bundle/AutoComplPop'
 
-Plug '~/.vim/bundle/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 
 " we do not want to use this for now
 " Plug '~/.vim/bundle/autocomplete-flow'
 
-Plug '~/.vim/bundle/csv', {'for': 'csv'}
+Plug 'chrisbra/csv.vim', {'for': 'csv'}
 
 " The project below is old now and need to be updated
 " Plug '~/.vim/bundle/nvim-completion-manager'
 
-Plug '~/.vim/bundle/delimitMate'
-Plug '~/.vim/bundle/indentLine'
-Plug '~/.vim/bundle/jedi-vim', {'for': 'javascript'}
-Plug '~/.vim/bundle/jshint.vim', {'for': 'javascript'}
-Plug '~/.vim/bundle/neoformat'
-Plug '~/.vim/bundle/nerdtree', {'on': ['NERDTreeToggle', 'NERDTree']}
-Plug '~/.vim/bundle/riv.vim', {'for': 'rst'}
-Plug '~/.vim/bundle/rust.vim', {'for': 'rust'}
-Plug '~/.vim/bundle/split-term.vim'
-Plug '~/.vim/bundle/taboo.vim'
-Plug '~/.vim/bundle/tabular'
-Plug '~/.vim/bundle/tagbar'
-Plug '~/.vim/bundle/tern_for_vim', {'for': 'javascript'}
-Plug '~/.vim/bundle/vim-airline'
-Plug '~/.vim/bundle/vim-airline-themes'
-Plug '~/.vim/bundle/vim-buffergator'
-Plug '~/.vim/bundle/vim-colorschemes'
-Plug '~/.vim/bundle/vim-easymotion'
-Plug '~/.vim/bundle/vim-fugitive'
-Plug '~/.vim/bundle/vim-indent-guides'
-Plug '~/.vim/bundle/vim-javascript-syntax', {'for': 'javascript'}
-Plug '~/.vim/bundle/vim-jsdoc', {'for': 'javascript'}
-Plug '~/.vim/bundle/vim-lion'
-Plug '~/.vim/bundle/vim-markdown-preview', {'for': 'markdown'}
+Plug 'Raimondi/delimitMate'
+Plug 'Yggdroot/indentLine'
+Plug 'davidhalter/jedi-vim', {'for': 'javascript'}
+Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
+Plug 'sbdchd/neoformat'
+Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTree']}
+Plug 'Rykka/riv.vim', {'for': 'rst'}
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'vimlab/split-term.vim'
+Plug 'gcmt/taboo.vim'
+Plug 'godlygeek/tabular'
+Plug 'majutsushi/tagbar'
+Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'flazz/vim-colorschemes'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-fugitive'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'heavenshell/vim-jsdoc', {'for': 'javascript'}
+Plug 'tommcdo/vim-lion'
+Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
 
 " Instead of automatically loaded last sessio, we want startify to be the first screen.
 " Plug '~/.vim/bundle/vim-plugin-autosess'
-
-Plug '~/.vim/bundle/vim-signature'
-Plug '~/.vim/bundle/vim-startify'
-Plug '~/.vim/bundle/vim-tmux-navigator'
-Plug '~/.vim/bundle/wiki.vim', {'for': 'markdown'}
-Plug '~/.vim/bundle/YouCompleteMe', {'for': ['python', 'javascript', 'c', 'c++', 'dart']}
+Plug 'kshenoy/vim-signature'
+Plug 'mhinz/vim-startify'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vimwiki/vimwiki', {'for': 'markdown'}
+Plug 'ycm-core/YouCompleteMe', {'for': ['java', 'python', 'javascript', 'c', 'c++']}
 
 Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 
 Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': 'dart'}
+Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
+"Plug 'natebosch/vim-lsc', {'for': 'dart'}
+"Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
+"Plug 'thosakwe/vim-flutter', {'for': 'dart'}
 
-Plug 'keith/swift', {'for': 'swift'}
+"Plug 'keith/swift', {'for': 'swift'}
 
 call plug#end()
 
