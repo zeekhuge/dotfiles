@@ -78,6 +78,9 @@ filetype plugin indent on
 set background=dark
 set t_Co=256
 
+"vim-lsc setting
+let g:lsc_auto_map = v:true
+
 "wikivim plugin
 let g:vimwiki_list = [{'path':'~/vimwiki', 'syntax':'markdown', 'ext':'.wiki'}]
 
