@@ -1,7 +1,7 @@
 set $mod Mod4
 
-#set $lock_command "xwobf -s 4 /tmp/screen_lock.png && i3lock -i /tmp/screen_lock.png -I 10 -n -e"
-set $lock_command "xscreensaver-command -lock"
+set $lock_command "xwobf -s 4 /tmp/screen_lock.png && i3lock -i /tmp/screen_lock.png -I 10 -n -e"
+#set $lock_command "xscreensaver-command -lock"
 set $lock_suspend "xscreensaver-command -lock && systemctl suspend"
 
 #set $fix_external_monitor xrandr --output $screeen_external_xrandr_name --auto --above $screen_builtIn_xrandr_name
@@ -111,15 +111,15 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 
-workspace $ws1 output VGA-1-1
-workspace $ws2 output VGA-1-1
-workspace $ws3 output VGA-1-1
-workspace $ws4 output VGA-1-1
-workspace $ws5 output VGA-1-1
-workspace $ws6 output VGA-1-1
+workspace $ws1 output VGA-1
+workspace $ws2 output VGA-1
+workspace $ws3 output VGA-1
+workspace $ws4 output VGA-1
+workspace $ws5 output VGA-1
+workspace $ws6 output VGA-1
 
-workspace $ws7 output LVDS-1-1
-workspace $ws8 output LVDS-1-1
+workspace $ws7 output LVDS-1
+workspace $ws8 output LVDS-1
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -225,7 +225,7 @@ bindsym $mod+0 mode "$mode_i3"
 set $mode_i3 (l)ock, (f)ix_displays, restart_(p)olybar, (r)estart_i3w
 mode "$mode_i3" {
     bindsym l exec --no-startup-id $lock_command, mode "default"
-    bindsym f exec --no-startup-id xrandr --output VGA-1-1 --auto --above LVDS-1-1, mode "default"
+    bindsym f exec --no-startup-id xrandr --output VGA-1 --auto --above LVDS-1, mode "default"
     bindsym p exec --no-startup-id /$HOME/.config/polybar/i3wmthemer_bar_launch.sh, mode "default"
     bindsym r restart, mode "default"
 
