@@ -64,6 +64,10 @@ Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': 'dart'}
 Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
+
+Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'dart', 'python', 'javascript', 'c', 'c++']}
+Plug 'vimoxide/vim-cinnabar'
+
 "Plug 'natebosch/vim-lsc', {'for': 'dart'}
 "Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
 "Plug 'thosakwe/vim-flutter', {'for': 'dart'}
@@ -75,8 +79,13 @@ call plug#end()
 syntax on
 filetype plugin indent on
 
+set termguicolors
 set background=dark
 set t_Co=256
+
+
+" gen_tags settings
+let g:gen_tags#statusline = 1
 
 "vim-lsc setting
 let g:lsc_auto_map = v:true
@@ -147,7 +156,7 @@ let g:buffergator_mru_cycle_loop = 1
 
 
 " chosen colorscheme for vim and airline
-:colorscheme CandyPaper
+colorscheme cinnabar
 :let g:airline_theme='badwolf'
 
 
