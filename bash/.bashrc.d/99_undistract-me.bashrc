@@ -3,7 +3,7 @@
 # Copyright (c) 2008-2012 undistract-me developers. See LICENSE for details.
 #
 # Check for interactive bash and that we haven't already been sourced.
-export LONG_RUNNING_COMMAND_TIMEOUT=5
+export LONG_RUNNING_COMMAND_TIMEOUT=3
 
 [ -z "$BASH_VERSION" -o -z "$PS1" -o -n "$last_command_started_cache" ] && return
 

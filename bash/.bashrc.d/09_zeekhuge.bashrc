@@ -67,8 +67,9 @@ PATH="${PATH}:${JAVA_HOME}/bin:${JRE_HOME}/bin"
 PATH="${PATH}:/home/zeekhuge/bin"
 PATH=$ANDROID_PLATFORM_TOOLS:$PATH
 PATH="/home/zeekhuge/.npm-global/bin":$PATH
-PATH="${PATH}:/home/zeekhuge/flutter-installed/flutter/bin/"
-PATH="${PATH}:/home/zeekhuge/flutter-installed/flutter/bin/cache/dart-sdk/bin/"
+PATH="/usr/lib/dart/bin":$PATH
+PATH="/home/zeekhuge/flutter-installed/flutter/bin/":${PATH}
+#PATH="${PATH}:/home/zeekhuge/flutter-installed/flutter/bin/cache/dart-sdk/bin/"
 export PATH
 
 #############################################################################################################
@@ -89,6 +90,39 @@ function set-title(){
 
 function cdiff () {
     diff -u $@ | colordiff | less -R
+}
+
+function getIp () {
+    get_interfaces ()  {
+        echo -e $(ifconfig | grep "Link" | sed 's/^\(.*\)\s\+Link.*$/\1/')
+    } 
+
+    is_interface_connected () {
+        local iface=$1
+        (ifconfig ${iface} | grep -iq "inet addr") && echo 1 || echo 0
+    }
+
+    get_interface_ip () {
+        local iface=$1
+        echo $(ifconfig ${iface} | grep "inet addr" | sed 's/.*addr:\(.*\)\s\+\(Bcast.*$\|Mask.*$\)/\1/') 
+    }
+
+    local ifaces=$(get_interfaces)
+    local output=""
+    for nface in ${ifaces}; do
+        if [ "$(is_interface_connected ${nface})" == "1" ]; then
+            output+="${nface}\t\t$(get_interface_ip ${nface})\n"
+        fi
+    done
+    if [ "$1" != "" ]; then
+        echo -e ${output} | grep "$1" | sed 's/^.*\s\+\([0-9].*$\)/\1/'
+    else
+        echo -e ${output}
+    fi
+
+    unset get_interface_ip
+    unset is_interface_connected
+    unset get_interfaces
 }
 
 gen_z_prompt () {
