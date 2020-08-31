@@ -182,6 +182,8 @@ for_window [class="Xfburn"] floating enable
 for_window [title="Android studio(?)"] floating enable border normal
 for_window [title="IntelliJ IDEA(?)"] floating enable border normal
 for_window [class=".*"] border pixel 4
+for_window [class="(?i)mpv"] floating enable, sticky enable, resize set 400 300, move absolute position 670 1660
+for_window [class="(?i)gsimplecal"] floating enable
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -189,17 +191,13 @@ for_window [urgent=latest] focus
 # reload the configuration file
 bindsym $mod+Shift+c reload, exec --no-startup-id notify-send -t 500 'i3 config reloaded'
 
+bindsym $mod+ctrl+s exec i3-msg sticky toggle, exec --no-startup-id notify-send -t 500 'Sticky toggled'
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 # instead use $mod++ to get into the system-mode and then restart
 # bindsym $mod+Shift+r restart
 
 
-#bar {
-#    font pango:Inconsolata 10
-#    position top
-#    tray_output VGA-1-1
-#    status_command ~/Projects/OpenSource/bumblebee-status/bumblebee-status -m apt bluetooth brightness docker_ps indicator disk:root cpu memory battery pasink pasource -p root.path=/ time.format="%H:%M CW %V" date.format="%a, %b %d %Y" -t solarized-powerline
-#}
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
@@ -267,7 +265,7 @@ exec --no-startup-id clipit
 exec_always --no-startup-id xscreensaver -no-splash
 exec --no-startup-id redshift-gtk
 exec --no-startup-id dunst
-#exec xautolock -corners -000 -detectsleep -notify 10 -notifier "notify-send 'Locking for inactivity'" -time 3 -locker $lock_command
+exec xautolock -corners -000 -detectsleep -notify 10 -notifier "notify-send 'Locking for inactivity'" -time 3 -locker $lock_command
 exec --no-startup-id artha
 exec --no-startup-id duplicati
 exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
