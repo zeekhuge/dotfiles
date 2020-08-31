@@ -41,6 +41,9 @@ alias exContainer='docker run -it -v ~:/root/ project/experiment_container:lates
 # ParseDashboard
 alias pDashContainer='docker run -d -v ~/Projects/Dashboard:/etc/parse -p 127.0.0.1:4040:4040 --name parse-dashboard --rm project/dashboard:latest'
 
+# cmus thing
+alias cmus='screen -q -r -D cmus || screen -S cmus $(which cmus)'
+
 #############################################################################################################
 
 ## Vars
