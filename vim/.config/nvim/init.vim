@@ -13,8 +13,7 @@ call plug#begin('~/.config/nvim/bundle/')
 "Plug '~/.vim/bundle/ale'
 Plug 'skywind3000/asyncrun.vim'
 
-" we probably do not want this, we already have YCM
-"Plug '~/.vim/bundle/AutoComplPop'
+Plug 'vim-scripts/AutoComplPop'
 
 Plug 'kien/ctrlp.vim'
 
