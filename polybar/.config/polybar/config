@@ -12,6 +12,7 @@ indigo = #3949ab
 blue = #1e88e5
 light-blue = #039be5
 cyan = #00acc1
+black = #00000
 teal = #00897b
 green = #43a047
 light-green = #7cb342
@@ -22,13 +23,18 @@ orange = #fb8c00
 deep-orange = #f4511e
 brown = #6d4c41
 grey = #757575
-blue-gray = #546e7a
+blue-grey = #546e7a
+white = #ffffff
 
 fg = ${xrdb:color7}
 modfg = ${xrdb:color3}
 alt = ${xrdb:color2}
 alt2 = ${xrdb:color1}
 bg = ${xrdb:color0}
+
+background = #ff1c1c22
+foreground = #d9d6ca
+
 
 
 [bar/base]
@@ -37,8 +43,8 @@ height = 27
 radius = 0
 fixed-center = false
 
-background = #991c1c22
-foreground = #d9d6ca
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 line-size = 3
 line-color =
@@ -66,16 +72,22 @@ monitor = ${env:MONITOR:}
 inherit = bar/base
 tray-position = left
 tray-padding = 2px
-tray_output = ${env:MONITOR:}
+tray-background = ${colors.background}
 
-modules-left = wlan eth temperature
 modules-center = i3 keyboard
+modules-left = wlan eth temperature pulseaudio
 modules-right = popup-calendar
+
+
+# all modules in top
+#modules-center = cmus i3 keyboard
+#modules-left = wlan eth temperature memory cpu pulseaudio
+#modules-right = battery filesystem popup-calendar powermenu
 
 [bar/i3wmthemer_bar_bottom]
 inherit = bar/base
 bottom = true
-modules-left = memory cpu pulseaudio
+modules-left = memory cpu update-manager
 modules-right = battery filesystem powermenu
 
 
@@ -95,8 +107,8 @@ base-temperature = 20
 warn-temperature = 85
 label-warn-padding = 2
 label-warn = %temperature-c%
-label-warn-background = #f00
-label-warn-foreground = #fff
+label-warn-background = ${colors.red}
+label-warn-foreground = ${colors.white}
 
 
 [module/keyboard]
@@ -108,8 +120,8 @@ label-indicator-background = #8139e8
 
 
 [module/filesystem]
-format-mounted-foreground = #cccccc
-format-mounted-background = #5c828d
+format-mounted-foreground = ${colors.light-blue}
+; format-mounted-background = #5c828d
 format-mounted-padding = 2
 interval = 30
 type = internal/fs
@@ -123,8 +135,7 @@ label-mounted = %mountpoint%: %percentage_free%% of %total%
 
 
 [module/memory]
-format-foreground = #cccccc
-format-background = #5c828d
+format-foreground = ${colors.lime}
 format-padding = 2
 type = internal/memory
 interval = 5
@@ -157,8 +168,42 @@ ramp-free-4 = ▅
 ramp-free-5 = ▆
 ramp-free-6 = ▇
 ramp-free-7 = █
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+[module/update-manager]
+type = custom/script
+
+exec = /usr/lib/update-notifier/apt-check --human-readable
+click-left = update-manager
+
+interval = 86400
+
+label-font = 3
+label = %output%
+format = <label>
+label-foreground = ${colors.cyan}
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/cmus]
+type = custom/script
+
+exec = ~/.config/polybar/cmus.sh
+exec-if = pgrep -x cmus
+interval = 0.25
+
+click-left = cmus-remote --pause
+scroll-up = cmus-remote --volume +5%
+scroll-down = cmus-remote --volume -5%
+
+label-font = 3
+format = <label>
+format-underline = ${colors.green}
+label = %output%
+label-maxlen = 50
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [module/mpd]
 type = internal/mpd
@@ -197,14 +242,13 @@ interval = 1
 ;   <bar-load>
 ;   <ramp-load>
 ;   <ramp-coreload>
-format = <label> <ramp-coreload>
+format = <ramp-coreload>
 
 ; Available tokens:
 ;   %percentage% (default) - total cpu load averaged over all cores
 ;   %percentage-sum% - Cumulative load on all cores
 ;   %percentage-cores% - load percentage for each core
 ;   %percentage-core[1-9]% - load percentage for specific core
-label = CPU : 
 
 ; Spacing between individual per-core ramps
 ramp-coreload-spacing = 2
@@ -259,8 +303,10 @@ time-format = %H:%M
 format-charging = <animation-charging> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 
-label-charging = Charging %percentage%%
-label-discharging = Discharging %percentage%%
+label-charging = %percentage%%
+label-charging-foreground = ${colors.green}
+label-discharging = %percentage%%
+label-discharging-foreground = ${colors.white}
 
 animation-charging-0 = 
 animation-charging-1 = 
@@ -269,10 +315,13 @@ animation-charging-3 = 
 animation-charging-4 = 
 ; Framerate in milliseconds
 animation-charging-framerate = 750
+animation-charging-foreground = ${colors.green}
 
+ramp-capacity-foreground = ${colors.white}
 ramp-capacity-0 = 
-ramp-capacity-0-foreground = #de0037
+ramp-capacity-0-foreground = ${colors.red}
 ramp-capacity-1 = 
+ramp-capacity-1-foreground = #{colors.red}
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
@@ -326,9 +375,10 @@ type = internal/network
 interface = wlan0
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
-format-connected-foreground = #1c1c22
-format-connected-background = #5c828d
+format-connected = <label-connected>
+format-connected-underline = ${colors.blue}
+format-connected-foreground = ${colors.white}
+#format-connected-background = #5c828d
 format-connected-padding = 2
 label-connected = %essid% %downspeed:9%
 
@@ -366,8 +416,9 @@ exec = date +" %Y-%m-%d %a %I:%M:%S %p %Z"
 interval = 5
 click-left = gsimplecal
 format-prefix = 
-format-foreground = #cccccc
-format-background = #5c828d
+format-foreground = ${colors.white}
+#format-background = #5c828d
+format-underline = ${colors.blue}
 format-padding = 2
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
