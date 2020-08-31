@@ -87,6 +87,7 @@ modules-right = popup-calendar
 [bar/i3wmthemer_bar_bottom]
 inherit = bar/base
 bottom = true
+modules-center = cmus
 modules-left = memory cpu update-manager
 modules-right = battery filesystem powermenu
 
@@ -102,7 +103,7 @@ type = internal/temperature
 
 interval = 4
 thermal-zone = 1
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input
 base-temperature = 20
 warn-temperature = 85
 label-warn-padding = 2
