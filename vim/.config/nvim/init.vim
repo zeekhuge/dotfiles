@@ -242,24 +242,6 @@ let Tlist_Auto_Highlight_Tag = 1
 let Tlist_GainFocus_On_ToggleOpen = 0
 let Tlist_Use_Right_Window = 1
 
-" to fix Yanking and system clipboard problem
-" basically a combination of two workarounds
-" https://github.com/neovim/neovim/issues/583#issuecomment-40942281
-" and
-" https://github.com/neovim/neovim/issues/583#issuecomment-43196619
-function! ClipboardYank()
-  call system('xclip -i -selection clipboard', @@)
-endfunction
-function! ClipboardPaste()
-  let @@ = system('xclip -o -selection clipboard')
-endfunction
-
-vnoremap <silent> y y:call ClipboardYank()<cr>
-vnoremap <silent> d d:call ClipboardYank()<cr>
-nnoremap <silent> p :call ClipboardPaste()<cr>p
-onoremap <silent> y y:call ClipboardYank()<cr>
-onoremap <silent> d d:call ClipboardYank()<cr>
-
 "highlight `TODO`
 :highlight Highlight_EXTREME ctermfg=Black ctermbg=Blue guifg=Black guibg=Red
 :highlight Highlight_NEED_NOTICE ctermfg=Black ctermbg=Yellow guifg=Black guibg=Yellow
@@ -455,8 +437,8 @@ nnoremap zx o<ESC>
 nnoremap -tb2 <C-W><T>:Tabmerge 2<CR>
 nnoremap -tb3 <C-W><T>:Tabmerge 3<CR>
 set clipboard=unnamed
-nnoremap Y "+y
-nnoremap P "+p
+map Y "+y
+map P "+p
 
 "tabline.vim settings
 " Newer schemes seem to be support tabling, hence comment out
