@@ -40,7 +40,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'jeetsukumaran/vim-buffergator'
+"Plug 'jeetsukumaran/vim-buffergator'
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
@@ -56,22 +56,23 @@ Plug 'kshenoy/vim-signature'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vimwiki/vimwiki', {'for': 'markdown'}
-Plug 'ycm-core/YouCompleteMe', {'for': ['java', 'python', 'javascript', 'c', 'c++']}
+Plug 'ycm-core/YouCompleteMe', {'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --clangd-completer', 'for': ['java', 'python', 'javascript', 'c', 'c++']}
 
 Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 
 Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': 'dart'}
-Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
+Plug 'natebosch/vim-lsc', {'for': 'dart'}
+    Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
+    Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
+Plug 'thosakwe/vim-flutter', {'for': 'dart'}
 
 Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'dart', 'python', 'javascript', 'c', 'c++']}
 Plug 'vimoxide/vim-cinnabar'
 
-"Plug 'natebosch/vim-lsc', {'for': 'dart'}
-"Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
-"Plug 'thosakwe/vim-flutter', {'for': 'dart'}
+Plug 'keith/swift.vim', {'for': 'swift'}
 
-"Plug 'keith/swift', {'for': 'swift'}
+Plug 'sirver/ultisnips'
+    Plug 'natebosch/dartlang-snippets'
 
 call plug#end()
 
@@ -81,7 +82,16 @@ filetype plugin indent on
 set termguicolors
 set background=dark
 set t_Co=256
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    keepp %s/\s\+$//e
+    call cursor(l, c)
+endfun
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
+" vim-lsc settings
+set shortmess-=F
 
 " gen_tags settings
 let g:gen_tags#statusline = 1
