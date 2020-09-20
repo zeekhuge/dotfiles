@@ -32,16 +32,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tommcdo/vim-lion'
 Plug 'kshenoy/vim-signature'
-Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vimoxide/vim-cinnabar'
+Plug 'powerman/vim-plugin-autosess'
 Plug 'sirver/ultisnips'
 Plug 'vimwiki/vimwiki', {'for': 'markdown'}
 Plug 'ycm-core/YouCompleteMe', {'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --clangd-completer', 'for': ['java', 'python', 'javascript', 'c', 'c++']}
 Plug 'natebosch/vim-lsc', {'for': 'dart'}
-"Plug 'jeetsukumaran/vim-buffergator'
-" Instead of automatically loaded last sessio, we want startify to be the first screen.
-" Plug '~/.vim/bundle/vim-plugin-autosess'
 "
 
 """""""""""""""""""""""""""""""""""""""""""""""""
