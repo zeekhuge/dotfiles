@@ -11,6 +11,28 @@
 call plug#begin('~/.config/nvim/bundle/')
 
 """""""""""""""""""""""""""""""""""""""""""""""""
+" Basic file/language plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+Plug 'chrisbra/csv.vim', {'for': 'csv'}
+
+Plug 'davidhalter/jedi-vim', {'for': 'javascript'}
+Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
+Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'heavenshell/vim-jsdoc', {'for': 'javascript'}
+
+Plug 'Rykka/riv.vim', {'for': 'rst'}
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
+
+Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
+Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
+
+Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
+
+Plug 'keith/swift.vim', {'for': 'swift'}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
 " Utility plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'skywind3000/asyncrun.vim'
@@ -49,31 +71,10 @@ Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'dart', 'python', 'javascript', 'c
 
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
-" File/language specific
-"""""""""""""""""""""""""""""""""""""""""""""""""
-
-Plug 'chrisbra/csv.vim', {'for': 'csv'}
-
-Plug 'davidhalter/jedi-vim', {'for': 'javascript'}
-Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
-Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
-Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
-Plug 'heavenshell/vim-jsdoc', {'for': 'javascript'}
-
-Plug 'Rykka/riv.vim', {'for': 'rst'}
-Plug 'rust-lang/rust.vim', {'for': 'rust'}
-
-Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
-Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
-
-Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
 Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
 Plug 'thosakwe/vim-flutter', {'for': 'dart'}
 Plug 'natebosch/dartlang-snippets', {'for': 'dart'}
-
-Plug 'keith/swift.vim', {'for': 'swift'}
 
 call plug#end()
 
