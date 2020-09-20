@@ -44,7 +44,6 @@ Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTree']}
 Plug 'vimlab/split-term.vim'
 Plug 'gcmt/taboo.vim'
-Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
