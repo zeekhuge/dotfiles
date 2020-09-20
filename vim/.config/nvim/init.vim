@@ -6,75 +6,72 @@
 "sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/autoload/plug.vim --create-dirs \
 "       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 "
-
-" to start vim-plug plugin manager
+"
+"
 call plug#begin('~/.config/nvim/bundle/')
 
-"Plug '~/.vim/bundle/ale'
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Utility plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'skywind3000/asyncrun.vim'
-
 Plug 'vim-scripts/AutoComplPop'
-
 Plug 'kien/ctrlp.vim'
-
-" we do not want to use this for now
-" Plug '~/.vim/bundle/autocomplete-flow'
-
-Plug 'chrisbra/csv.vim', {'for': 'csv'}
-
-" The project below is old now and need to be updated
-" Plug '~/.vim/bundle/nvim-completion-manager'
-
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
-Plug 'davidhalter/jedi-vim', {'for': 'javascript'}
-Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
 Plug 'sbdchd/neoformat'
 Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTree']}
-Plug 'Rykka/riv.vim', {'for': 'rst'}
-Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'vimlab/split-term.vim'
 Plug 'gcmt/taboo.vim'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
-Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'jeetsukumaran/vim-buffergator'
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
-Plug 'heavenshell/vim-jsdoc', {'for': 'javascript'}
 Plug 'tommcdo/vim-lion'
-Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
-
-" Instead of automatically loaded last sessio, we want startify to be the first screen.
-" Plug '~/.vim/bundle/vim-plugin-autosess'
 Plug 'kshenoy/vim-signature'
 Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'vimoxide/vim-cinnabar'
+Plug 'sirver/ultisnips'
 Plug 'vimwiki/vimwiki', {'for': 'markdown'}
 Plug 'ycm-core/YouCompleteMe', {'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --clangd-completer', 'for': ['java', 'python', 'javascript', 'c', 'c++']}
-
-Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
-
-Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 Plug 'natebosch/vim-lsc', {'for': 'dart'}
+"Plug 'jeetsukumaran/vim-buffergator'
+" Instead of automatically loaded last sessio, we want startify to be the first screen.
+" Plug '~/.vim/bundle/vim-plugin-autosess'
+"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" File/language specific
+"""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'chrisbra/csv.vim', {'for': 'csv'}
+Plug 'davidhalter/jedi-vim', {'for': 'javascript'}
+Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
+Plug 'Rykka/riv.vim', {'for': 'rst'}
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
+Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
+Plug 'heavenshell/vim-jsdoc', {'for': 'javascript'}
+Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
+Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
+Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
     Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
     Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
 Plug 'thosakwe/vim-flutter', {'for': 'dart'}
 
 Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'dart', 'python', 'javascript', 'c', 'c++']}
-Plug 'vimoxide/vim-cinnabar'
 
 Plug 'keith/swift.vim', {'for': 'swift'}
-
-Plug 'sirver/ultisnips'
-    Plug 'natebosch/dartlang-snippets'
+Plug 'natebosch/dartlang-snippets'
 
 call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""
 
 syntax on
 filetype plugin indent on
