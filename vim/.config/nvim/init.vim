@@ -37,14 +37,21 @@ Plug 'vimoxide/vim-cinnabar'
 Plug 'powerman/vim-plugin-autosess'
 Plug 'sirver/ultisnips'
 Plug 'vimwiki/vimwiki', {'for': 'markdown'}
-Plug 'ycm-core/YouCompleteMe', {'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --clangd-completer', 'for': ['java', 'python', 'javascript', 'c', 'c++']}
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Development utility
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
 Plug 'natebosch/vim-lsc', {'for': 'dart'}
-"
+Plug 'ycm-core/YouCompleteMe', {'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --clangd-completer', 'for': ['java', 'python', 'javascript', 'c', 'c++']}
+Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'dart', 'python', 'javascript', 'c', 'c++']}
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " File/language specific
 """""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'dart', 'python', 'javascript', 'c', 'c++']}
 
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
 
