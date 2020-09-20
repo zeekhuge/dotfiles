@@ -77,10 +77,19 @@ Plug 'natebosch/dartlang-snippets', {'for': 'dart'}
 
 call plug#end()
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""
-" Settings
+" Autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""
 
+autocmd BufNewFile *.cpp :r! sed -n 'p' < ~/Desktop/snck/.cpp.template
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=grey
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Other settings
+"""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 filetype plugin indent on
 
@@ -93,7 +102,6 @@ fun! <SID>StripTrailingWhitespaces()
     keepp %s/\s\+$//e
     call cursor(l, c)
 endfun
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " vim-lsc settings
 set shortmess-=F
@@ -196,8 +204,6 @@ let g:ale_sign_column_always = 1
 set ts=4 sw=4 et
 let g:indent_guides_enable_on_vim_startup = 0
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=grey
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
 let g:indentLine_char = '|'
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
@@ -483,7 +489,6 @@ nnoremap -TD i#// TODO :
 " To automatically add the modified file list when using 'git commit -v'
 "nnoremap -MF iModified Files:<ESC>I<ESC>5j
 
-autocmd BufNewFile *.cpp :r! sed -n 'p' < ~/Desktop/snck/.cpp.template
 "Do not set, as it slows vim down
 "autocmd InsertLeave * :set cul! | :redraw!
 "autocmd InsertEnter * :set cul! | :redraw!
