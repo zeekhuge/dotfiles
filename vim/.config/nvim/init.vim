@@ -64,11 +64,20 @@ Plug 'vimwiki/vimwiki', {'for': 'markdown'}
 " Development utility
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-Plug 'natebosch/vim-lsc', {'for': 'dart'}
+Plug 'natebosch/vim-lsc'
+let g:lsc_enable_autocomplete    = v:true
+let g:lsc_enable_diagnostics     = v:true
+let g:lsc_reference_highlights   = v:true
+let g:lsc_autocomplete_length    = 1
+let g:lsc_enable_snippet_support = v:true
+let g:lsc_auto_map               = {
+            \'defaults': v:true,
+            \'PreviousReference': '',
+            \'SignatureHelp': '<C-p>',
+            \}
+
 Plug 'ycm-core/YouCompleteMe', {'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --clangd-completer', 'for': ['java', 'python', 'javascript', 'c', 'c++']}
-Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'dart', 'python', 'javascript', 'c', 'c++']}
-
-
+Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'python', 'javascript', 'c', 'c++']}
 
 Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
 Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
@@ -82,10 +91,15 @@ call plug#end()
 " Autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""
 
+" Closes previw window opened by vim-lsc
+autocmd InsertLeave,CompleteDone * silent! pclose
+
+" Older commands
 autocmd BufNewFile *.cpp :r! sed -n 'p' < ~/Desktop/snck/.cpp.template
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=grey
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Other settings
@@ -103,14 +117,13 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-" vim-lsc settings
+" required by vim-lsc
 set shortmess-=F
+" vim-lsc overrides `completeopt` based on these settings
+let g:lsc_auto_completeopt       = 'menu,menuone,noinsert,preview'
 
 " gen_tags settings
 let g:gen_tags#statusline = 1
-
-"vim-lsc setting
-let g:lsc_auto_map = v:true
 
 "wikivim plugin
 let g:vimwiki_list = [{'path':'~/vimwiki', 'syntax':'markdown', 'ext':'.wiki'}]
@@ -149,7 +162,6 @@ endif
 
 " YCM config
 " the preview window is very annoying
-:set completeopt-=preview
 if (empty($VIRTUAL_ENV))
 	let g:ycm_python_binary_path = 'python'
 else
