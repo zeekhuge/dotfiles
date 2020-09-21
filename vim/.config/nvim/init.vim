@@ -29,6 +29,7 @@ Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
 Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 
 Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
+Plug 'zeekhuge/dart-vim-flutter-layout', {'for': 'dart'}
 
 Plug 'keith/swift.vim', {'for': 'swift'}
 
@@ -41,7 +42,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'sbdchd/neoformat'
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTree']}
+Plug 'scrooloose/nerdtree'
 Plug 'vimlab/split-term.vim'
 Plug 'gcmt/taboo.vim'
 Plug 'majutsushi/tagbar'
@@ -73,12 +74,15 @@ let g:lsc_auto_map               = {
             \'defaults': v:true,
             \'PreviousReference': '',
             \'SignatureHelp': '<C-p>',
+            \'FindCodeActions': '<C-o>',
             \}
 
 Plug 'ycm-core/YouCompleteMe', {'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --clangd-completer', 'for': ['java', 'python', 'javascript', 'c', 'c++']}
 Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'python', 'javascript', 'c', 'c++']}
 
 Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
+let g:lsc_dart_enable_completion_ml = v:true
+
 Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
 Plug 'thosakwe/vim-flutter', {'for': 'dart'}
 Plug 'natebosch/dartlang-snippets', {'for': 'dart'}
@@ -106,6 +110,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
 syntax on
 filetype plugin indent on
 
+set noexpandtab
 set termguicolors
 set background=dark
 set t_Co=256
