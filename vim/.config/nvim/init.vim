@@ -101,7 +101,43 @@ Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
 Plug 'thosakwe/vim-flutter', {'for': 'dart'}
 Plug 'natebosch/dartlang-snippets', {'for': 'dart'}
 
+Plug 'hsanson/vim-android'
+let g:gradle_loclist_show=1
+let g:android_sdk_path = expand("$ANDROID_HOME")
+
 call plug#end()
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" API callbacks
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+" airline
+call airline#parts#define_function(
+            \ 'gradle-running',
+            \ 'lightline#gradle#running'
+            \)
+
+call airline#parts#define_function(
+            \ 'gradle-warning',
+            \ 'lightline#gradle#warnings'
+            \)
+
+call airline#parts#define_function(
+            \ 'gradle-errors',
+            \ 'lightline#gradle#errors'
+            \)
+
+call airline#parts#define_function(
+            \ 'gradle-project',
+            \ 'lightline#gradle#project'
+            \)
+
+let g:airline_section_x = airline#section#create_right([
+            \'gradle-running',
+            \'gradle-warning',
+            \'gradle-errors',
+            \'gradle-project',
+            \])
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
