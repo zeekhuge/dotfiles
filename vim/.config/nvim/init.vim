@@ -80,6 +80,7 @@ let g:lsc_enable_diagnostics     = v:true
 let g:lsc_reference_highlights   = v:true
 let g:lsc_autocomplete_length    = 1
 let g:lsc_enable_snippet_support = v:true
+let g:lsc_trace_level = 'verbose'
 let g:lsc_auto_map               = {
             \'defaults': v:true,
             \'PreviousReference': '',
@@ -87,7 +88,10 @@ let g:lsc_auto_map               = {
             \'FindCodeActions': '<C-o>',
             \}
 
-Plug 'ycm-core/YouCompleteMe', {'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --clangd-completer', 'for': ['java', 'python', 'javascript', 'c', 'c++']}
+Plug 'ycm-core/YouCompleteMe', {
+            \'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --java-completer --clangd-completer',
+            \'for': ['java', 'python', 'javascript', 'c', 'c++']
+            \}
 Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'python', 'javascript', 'c', 'c++']}
 
 Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
