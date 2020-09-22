@@ -55,7 +55,17 @@ Plug 'tommcdo/vim-lion'
 Plug 'kshenoy/vim-signature'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vimoxide/vim-cinnabar'
+
 Plug 'powerman/vim-plugin-autosess'
+function! s:AutosessReset()
+    silent !clear
+    execute "! rm " . fnameescape(v:this_session)
+    let v:this_session=""
+endfunction!
+command! -range -nargs=0 AutosessReset call s:AutosessReset()
+command! -range -nargs=0 AutosessUpdate call AutosessUpdate()
+command! -range -nargs=* AutosessRestore call AutosessRestore(<args>)
+
 Plug 'sirver/ultisnips'
 Plug 'vimwiki/vimwiki', {'for': 'markdown'}
 
