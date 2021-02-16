@@ -66,7 +66,7 @@ command! -range -nargs=0 AutosessReset call s:AutosessReset()
 command! -range -nargs=0 AutosessUpdate call AutosessUpdate()
 command! -range -nargs=* AutosessRestore call AutosessRestore(<args>)
 
-Plug 'sirver/ultisnips'
+"Plug 'sirver/ultisnips'
 Plug 'vimwiki/vimwiki', {'for': 'markdown'}
 
 
@@ -90,12 +90,13 @@ let g:lsc_auto_map               = {
 
 Plug 'ycm-core/YouCompleteMe', {
             \'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --java-completer --clangd-completer',
-            \'for': ['java', 'python', 'javascript', 'c', 'c++']
+            \'for': ['java', 'python', 'javascript', 'c', 'c++', 'cpp']
             \}
 Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'python', 'javascript', 'c', 'c++']}
 
 Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
 let g:lsc_dart_enable_completion_ml = v:true
+let g:lsc_enable_snippet_support = v:true
 
 Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
 Plug 'thosakwe/vim-flutter', {'for': 'dart'}
@@ -148,7 +149,7 @@ let g:airline_section_x = airline#section#create_right([
 autocmd InsertLeave,CompleteDone * silent! pclose
 
 " Older commands
-autocmd BufNewFile *.cpp :r! sed -n 'p' < ~/Desktop/snck/.cpp.template
+autocmd BufNewFile *.cpp :r! sed -n 'p' < ~/.snck/.cpp.template
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=grey
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
@@ -496,7 +497,7 @@ set tags=./tags;/,tags;/
 
 "Compile the current cpp file
 :command CC execute 'silent ! g++ -DDEBUG %:t -o %:t.out 2>output.txt 1>output.txt' | execute ':redraw!'
-:command Run execute 'silent ! ./%:t.out 1>output.txt 2>output.txt < input.txt' | execute ':redraw!'
+:command Run execute 'silent ! cat input.txt | sed "/^\/\/.*/d" | ./%:t.out 1>output.txt 2>output.txt ' | execute ':redraw!'
 
 :command CachedDiff :Commit | :R 'git diff --cached' | :set cc=0 | :set spell! spelllang=en_us
 
@@ -571,4 +572,3 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 15
 let g:netrw_preview = 1
-
