@@ -1,4 +1,3 @@
-" Neovim config
 " Author: Zubeen Tolani <contact@zeekhuge.me>
 
 " TO Install vim-plug, do the following:
@@ -15,9 +14,10 @@ call plug#begin('~/.config/nvim/bundle/')
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 Plug 'chrisbra/csv.vim', {'for': 'csv'}
-
-Plug 'davidhalter/jedi-vim', {'for': 'javascript'}
-Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
+Plug 'felixhummel/setcolors.vim'
+Plug 'davidhalter/jedi-vim', {'for': ['javascript', 'python']}
+" JSHINT is actually producing errors
+"Plug 'wookiehangover/jshint.vim', {'for': 'javascript'}
 Plug 'ternjs/tern_for_vim', {'for': 'javascript'}
 Plug 'jelera/vim-javascript-syntax', {'for': 'javascript'}
 Plug 'heavenshell/vim-jsdoc', {'for': 'javascript'}
@@ -25,20 +25,37 @@ Plug 'heavenshell/vim-jsdoc', {'for': 'javascript'}
 Plug 'Rykka/riv.vim', {'for': 'rst'}
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
-Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
+"Plug 'JamshedVesuna/vim-markdown-preview', {'for': 'markdown'}
 Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 
 Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 Plug 'zeekhuge/dart-vim-flutter-layout', {'for': 'dart'}
 
 Plug 'keith/swift.vim', {'for': 'swift'}
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty', {'for': ['js', 'jsx']}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
-" Utility plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Utility plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"Plug 'jeetsukumaran/vim-buffergator'
+":set hidden
+":nnoremap \q :BuffergatorOpen<CR>
+":nnoremap [b :BuffergatorMruCyclePrev<CR>
+":nnoremap ]b :BuffergatorMruCycleNext<CR>
+"let g:buffergator_viewport_split_policy = "T"
+"let g:buffergator_sort_regime = "mru"
+"let g:buffergator_show_full_directory_path = 0
+"let g:buffergator_tab_statusline = 0
+"let g:buffergator_window_statusline = 0
+"let g:buffergator_autodismiss_on_select = 1
+"let g:buffergator_autoupdate = 1
+"let g:buffergator_mru_cycle_loop = 1
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'kien/ctrlp.vim'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'sbdchd/neoformat'
@@ -47,7 +64,42 @@ Plug 'vimlab/split-term.vim'
 Plug 'gcmt/taboo.vim'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
+"call airline#parts#define_function(
+"            \ 'gradle-running',
+"            \ 'lightline#gradle#running'
+"            \)
+"
+"call airline#parts#define_function(
+"            \ 'gradle-warning',
+"            \ 'lightline#gradle#warnings'
+"            \)
+"
+"call airline#parts#define_function(
+"            \ 'gradle-errors',
+"            \ 'lightline#gradle#errors'
+"            \)
+"
+"call airline#parts#define_function(
+"            \ 'gradle-project',
+"            \ 'lightline#gradle#project'
+"            \)
+"
+"let g:airline_section_x = airline#section#create_right([
+"            \'gradle-running',
+"            \'gradle-warning',
+"            \'gradle-errors',
+"            \'gradle-project',
+"            \])
+let g:airline_powerline_fonts = 0
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_splits = 0
+let g:airline#extensions#tabline#show_tabs = 1
+
 Plug 'vim-airline/vim-airline-themes'
+:let g:airline_theme='badwolf'
+
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
@@ -73,8 +125,15 @@ Plug 'vimwiki/vimwiki', {'for': 'markdown'}
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Development utility
 """""""""""""""""""""""""""""""""""""""""""""""""
+"Plug 'neoclide/coc.nvim' , {
+"            \'branch' : 'release',
+"            \}
+let g:coc_global_extensions = [ 'coc-tsserver' ]
+let g:coc_disable_startup_warning = 1
+nmap <leader>a  <Plug>(coc-codeaction)
+nmap <leader>q  <Plug>(coc-fix-current)
 
-Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc', {'for': ['dart']}
 let g:lsc_enable_autocomplete    = v:true
 let g:lsc_enable_diagnostics     = v:true
 let g:lsc_reference_highlights   = v:true
@@ -90,21 +149,21 @@ let g:lsc_auto_map               = {
 
 Plug 'ycm-core/YouCompleteMe', {
             \'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --java-completer --clangd-completer',
-            \'for': ['java', 'python', 'javascript', 'c', 'c++', 'cpp']
+            \'for': ['sh', 'bash']
             \}
-Plug 'jsfaint/gen_tags.vim', {'for': ['java', 'python', 'javascript', 'c', 'c++']}
+let g:ycm_collect_identifiers_from_tags_files = 1
 
-Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
+
+Plug 'jsfaint/gen_tags.vim', {'for': ['typescript', 'java', 'python', 'javascript', 'c', 'c++']}
+
+"Plug 'natebosch/vim-lsc-dart', {'for': 'dart'}
 let g:lsc_dart_enable_completion_ml = v:true
 let g:lsc_enable_snippet_support = v:true
 
-Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
-Plug 'thosakwe/vim-flutter', {'for': 'dart'}
-Plug 'natebosch/dartlang-snippets', {'for': 'dart'}
+"Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
+"Plug 'thosakwe/vim-flutter', {'for': 'dart'}
+"Plug 'natebosch/dartlang-snippets', {'for': 'dart'}
 
-Plug 'hsanson/vim-android'
-let g:gradle_loclist_show=1
-let g:android_sdk_path = expand("$ANDROID_HOME")
 
 call plug#end()
 
@@ -112,33 +171,6 @@ call plug#end()
 " API callbacks
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-" airline
-call airline#parts#define_function(
-            \ 'gradle-running',
-            \ 'lightline#gradle#running'
-            \)
-
-call airline#parts#define_function(
-            \ 'gradle-warning',
-            \ 'lightline#gradle#warnings'
-            \)
-
-call airline#parts#define_function(
-            \ 'gradle-errors',
-            \ 'lightline#gradle#errors'
-            \)
-
-call airline#parts#define_function(
-            \ 'gradle-project',
-            \ 'lightline#gradle#project'
-            \)
-
-let g:airline_section_x = airline#section#create_right([
-            \'gradle-running',
-            \'gradle-warning',
-            \'gradle-errors',
-            \'gradle-project',
-            \])
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -158,6 +190,10 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=black
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Other settings
 """""""""""""""""""""""""""""""""""""""""""""""""
+
+
+nnoremap all iCopyright (C) AIMED LABS - All Rights Reserved<RETURN>Author by Zubeen Tolani <zubeen@aimedlabs.com>.<RETURN> - Unauthorized copying and/or distribution of any of the files in this entire repository, via any medium whatsoever is strictly prohibited and punishable by law.<RETURN> - All the information/code/text/file in this repository is intellectual property of AIMED LABS and is highly confidential.<ESC>
+
 syntax on
 filetype plugin indent on
 
@@ -230,23 +266,11 @@ let g:startify_session_autoload = 1
 let g:startify_session_persistence = 0
 
 " bffergator settings
-:set hidden
-:nnoremap \q :BuffergatorOpen<CR>
-:nnoremap [b :BuffergatorMruCyclePrev<CR>
-:nnoremap ]b :BuffergatorMruCycleNext<CR>
-let g:buffergator_viewport_split_policy = "T"
-let g:buffergator_sort_regime = "mru"
-let g:buffergator_show_full_directory_path = 0
-let g:buffergator_tab_statusline = 0
-let g:buffergator_window_statusline = 0
-let g:buffergator_autodismiss_on_select = 1
-let g:buffergator_autoupdate = 1
-let g:buffergator_mru_cycle_loop = 1
 
 
 " chosen colorscheme for vim and airline
 colorscheme cinnabar
-:let g:airline_theme='badwolf'
+au BufReadPost,BufNewFile *.ts hi! link typescriptIdentifier cinnabarBlue
 
 
 " settings for the vim-jsdoc plugins
@@ -275,14 +299,10 @@ let g:indentLine_char = '|'
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-" airline settings
-let g:airline_powerline_fonts = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#ale#enabled = 1
 
 
 " autocomplpop settings
-let g:acp_enableAtStartup = 1
+let g:acp_enableAtStartup = 0
 let g:acp_ignorecaseOption = 0
 
 " deoplete settings
