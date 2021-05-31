@@ -1,0 +1,61 @@
+[user]
+	name = Zubeen Tolani
+	email = contact@zeekhuge.me
+[core]
+	editor = nvim +Comment
+	hooksPath = /home/zeekhuge/projects/aimed-labs/aimed-labs-dev-config/githooks
+[push]
+	default = current
+[diff]
+	tool = vimdiff
+[alias]
+	d = difftool -y
+    graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+    #add-commit = "!f() { git add $(get_arg \"$@\" f) && git commit $(get_arg \"$@\" m); }; f"
+    #add-commit = "! getFile() { echo $1 | sed 's/.*\s\+-f\s\+//' | sed 's/\s\+-.*//';} ; getCommit () { echo $1 | sed 's/.*\s\+-m\s\+//' | sed 's/\s\+-.*//' ;} ;getFile $@; "
+    add-commit = "! \
+        getMsg() { echo $@ | sed 's/.*-m\\s\\+//g' | sed 's/\\s\\+-.*//' ; }; \
+        getFile() { echo $@ | sed 's/.*-f\\s\\+//g' | sed 's/\\s\\+-.*//' ; }; \
+        \
+        f () { git add \"$@\" && git commit -v; }; \
+        f"
+    l = log
+    s = status
+    lo = log --oneline
+    lp = log -p
+    lg = log --oneline --graph --decorate --all
+    lop = log --oneline -p
+    lpo = log --oneline -p
+    d10 = diff -U10
+    d20 = diff -U20
+[difftool]
+	promt = false
+[github]
+	user = zeekhuge
+[ghi]
+    token = "!f() { gksudo  cat /root/github_tokens/ghi.token; }; f"
+[color]
+    ui = auto
+[gui]
+	recentrepo = /tmp/a
+	editor = gvim
+[pack]
+	SizeLimit = 100m
+	windowMemory = 100m
+	threads = 1
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[pull]
+	ff = only
+[cola]
+	spellcheck = false
+	boldheaders = true
+[init]
+	defaultBranch = main
+[submodule]
+	recurse = true
+[dude]
+	interval = 30
