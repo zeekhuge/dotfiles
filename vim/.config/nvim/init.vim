@@ -13,7 +13,8 @@ call plug#begin('~/.config/nvim/bundle/')
 " Basic file/language plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-Plug 'chrisbra/csv.vim', {'for': 'csv'}
+Plug 'iamcco/coc-tailwindcss',  {'do': 'npm install --frozen-lockfile && npm run build'}
+"Plug 'chrisbra/csv.vim', {'for': 'csv'}
 Plug 'felixhummel/setcolors.vim'
 Plug 'davidhalter/jedi-vim', {'for': ['javascript', 'python']}
 " JSHINT is actually producing errors
@@ -34,6 +35,7 @@ Plug 'zeekhuge/dart-vim-flutter-layout', {'for': 'dart'}
 Plug 'keith/swift.vim', {'for': 'swift'}
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty', {'for': ['js', 'jsx']}
+Plug 'OmniSharp/omnisharp-vim', {'for': ['cs']}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 "" Utility plugins
@@ -53,8 +55,14 @@ Plug 'maxmellon/vim-jsx-pretty', {'for': ['js', 'jsx']}
 "let g:buffergator_mru_cycle_loop = 1
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-scripts/AutoComplPop'
+
 Plug 'kien/ctrlp.vim'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard']
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_switch_buffer = 'et'
+nnoremap <C-m> :CtrlPLine<CR>
 
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
@@ -63,6 +71,19 @@ Plug 'scrooloose/nerdtree'
 Plug 'vimlab/split-term.vim'
 Plug 'gcmt/taboo.vim'
 Plug 'majutsushi/tagbar'
+" Based on https://github.com/preservim/tagbar/wiki#typescript
+let g:tagbar_type_typescript = {
+  \ 'ctagstype': 'typescript',
+  \ 'kinds': [
+    \ 'c:classes',
+    \ 'n:modules',
+    \ 'f:functions',
+    \ 'v:variables',
+    \ 'v:varlambdas',
+    \ 'i:interfaces',
+    \ 'e:enums',
+  \ ]
+\ }
 Plug 'vim-airline/vim-airline'
 "call airline#parts#define_function(
 "            \ 'gradle-running',
@@ -125,13 +146,47 @@ Plug 'vimwiki/vimwiki', {'for': 'markdown'}
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Development utility
 """""""""""""""""""""""""""""""""""""""""""""""""
-"Plug 'neoclide/coc.nvim' , {
-"            \'branch' : 'release',
-"            \}
-let g:coc_global_extensions = [ 'coc-tsserver' ]
+Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim' , {
+            \'branch' : 'release',
+            \}
+let g:coc_global_extensions = [
+            \ 'coc-tsserver',
+            \ 'coc-snippets',
+            \ 'coc-styled-components',
+            \ 'coc-react-refactor',
+            \ 'coc-eslint',
+            \ 'coc-tailwindcss',
+            \ 'coc-vetur',
+            \ 'coc-sh',
+            \ 'coc-omnisharp',
+            \ 'coc-flutter',
+            \ 'coc-json'
+            \ ]
 let g:coc_disable_startup_warning = 1
-nmap <leader>a  <Plug>(coc-codeaction)
+nmap <leader>rn <Plug>(coc-rename)
+nmap <a-cr>  <Plug>(coc-codeaction)
+nmap <C-]>  <Plug>(coc-definition)
+nmap <C-g> <Plug>(coc-references)
+nmap <C-t>  <C-o>
 nmap <leader>q  <Plug>(coc-fix-current)
+nmap <leader>d  <Plug>(coc-diagnostic)
+nmap <silent>   <leader>[   <Plug>(coc-diagnostic-prev)
+nmap <silent>   <leader>]   <Plug>(coc-diagnostic-next)
+" Config from coc-snippets's readme
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
 Plug 'natebosch/vim-lsc', {'for': ['dart']}
 let g:lsc_enable_autocomplete    = v:true
@@ -147,11 +202,11 @@ let g:lsc_auto_map               = {
             \'FindCodeActions': '<C-o>',
             \}
 
-Plug 'ycm-core/YouCompleteMe', {
-            \'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --java-completer --clangd-completer',
-            \'for': ['sh', 'bash']
-            \}
-let g:ycm_collect_identifiers_from_tags_files = 1
+"Plug 'ycm-core/YouCompleteMe', {
+"            \'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --java-completer --clangd-completer',
+"            \'for': ['sh', 'bash', 'py']
+"            \}
+"let g:ycm_collect_identifiers_from_tags_files = 1
 
 
 Plug 'jsfaint/gen_tags.vim', {'for': ['typescript', 'java', 'python', 'javascript', 'c', 'c++']}
@@ -225,11 +280,6 @@ let g:wiki_root = '/home/zeekhuge/Journals/'
 "NerdTree ignoring files
 let NERDTreeIgnore = ['\.pyc$']
 
-"ctrlp settings
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 'et'
 
 "easymotion settings. Set them only if this is not ideavim (Android studio vim
 "plugin)
