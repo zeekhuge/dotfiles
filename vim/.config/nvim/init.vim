@@ -30,7 +30,7 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'gabrielelana/vim-markdown', {'for': 'markdown'}
 
 Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
-Plug 'zeekhuge/dart-vim-flutter-layout', {'for': 'dart'}
+"Plug 'zeekhuge/dart-vim-flutter-layout', {'for': 'dart'}
 
 Plug 'keith/swift.vim', {'for': 'swift'}
 Plug 'leafgarland/typescript-vim'
@@ -146,6 +146,14 @@ Plug 'vimwiki/vimwiki', {'for': 'markdown'}
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Development utility
 """""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'prettier/vim-prettier', {
+            \ 'do': 'npm install',
+            \ 'branch': 'release/1.x',
+            \ }
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+let g:prettier#quickfix_enabled=0
+
 Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim' , {
             \'branch' : 'release',
@@ -188,19 +196,19 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 xmap <leader>x  <Plug>(coc-convert-snippet)
 
-Plug 'natebosch/vim-lsc', {'for': ['dart']}
-let g:lsc_enable_autocomplete    = v:true
-let g:lsc_enable_diagnostics     = v:true
-let g:lsc_reference_highlights   = v:true
-let g:lsc_autocomplete_length    = 1
-let g:lsc_enable_snippet_support = v:true
-let g:lsc_trace_level = 'verbose'
-let g:lsc_auto_map               = {
-            \'defaults': v:true,
-            \'PreviousReference': '',
-            \'SignatureHelp': '<C-p>',
-            \'FindCodeActions': '<C-o>',
-            \}
+"Plug 'natebosch/vim-lsc', {'for': ['dart']}
+"let g:lsc_enable_autocomplete    = v:true
+"let g:lsc_enable_diagnostics     = v:true
+"let g:lsc_reference_highlights   = v:true
+"let g:lsc_autocomplete_length    = 1
+"let g:lsc_enable_snippet_support = v:true
+"let g:lsc_trace_level = 'verbose'
+"let g:lsc_auto_map               = {
+"            \'defaults': v:true,
+"            \'PreviousReference': '',
+"            \'SignatureHelp': '<C-p>',
+"            \'FindCodeActions': '<C-o>',
+"            \}
 
 "Plug 'ycm-core/YouCompleteMe', {
 "            \'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --java-completer --clangd-completer',
@@ -217,7 +225,7 @@ let g:lsc_enable_snippet_support = v:true
 
 "Plug 'hrsh7th/vim-vsnip', {'for': 'dart'}
 "Plug 'thosakwe/vim-flutter', {'for': 'dart'}
-"Plug 'natebosch/dartlang-snippets', {'for': 'dart'}
+Plug 'natebosch/dartlang-snippets', {'for': 'dart'}
 
 
 call plug#end()

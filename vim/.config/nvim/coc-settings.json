@@ -1,0 +1,7 @@
+{
+    "omnisharp.version": "v1.37.3",
+    "omnisharp.trace.server": "information",
+    "coc.source.OmniSharp.enable": true,
+    "coc.source.OmniSharp.triggerCharacters": ".",
+    "codeLens.enable": false
+}
