@@ -33,8 +33,11 @@ Plug 'dart-lang/dart-vim-plugin', {'for': 'dart'}
 "Plug 'zeekhuge/dart-vim-flutter-layout', {'for': 'dart'}
 
 Plug 'keith/swift.vim', {'for': 'swift'}
+
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty', {'for': ['js', 'jsx']}
+let g:vim_jsx_pretty_highlight_close_tag = 1
+
 Plug 'OmniSharp/omnisharp-vim', {'for': ['cs']}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -55,6 +58,14 @@ Plug 'OmniSharp/omnisharp-vim', {'for': ['cs']}
 "let g:buffergator_mru_cycle_loop = 1
 Plug 'skywind3000/asyncrun.vim'
 Plug 'vim-scripts/AutoComplPop'
+
+
+"Plug 'pseewald/anyfold'
+"filetype plugin indent on
+"syntax on
+"autocmd Filetype * AnyFoldActivate
+"set foldlevel=0
+
 
 Plug 'kien/ctrlp.vim'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard']
@@ -82,6 +93,7 @@ let g:tagbar_type_typescript = {
     \ 'v:varlambdas',
     \ 'i:interfaces',
     \ 'e:enums',
+    \ 'm:members',
   \ ]
 \ }
 Plug 'vim-airline/vim-airline'
@@ -123,7 +135,8 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
-Plug 'tpope/vim-fugitive'
+" Temporarily remove fugitive as it is causing errors
+"Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-lion'
 Plug 'kshenoy/vim-signature'
 Plug 'christoomey/vim-tmux-navigator'
@@ -151,7 +164,6 @@ Plug 'prettier/vim-prettier', {
             \ 'branch': 'release/1.x',
             \ }
 let g:prettier#autoformat = 1
-let g:prettier#autoformat_require_pragma = 0
 let g:prettier#quickfix_enabled=0
 
 Plug 'tpope/vim-fugitive'
@@ -650,3 +662,11 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 15
 let g:netrw_preview = 1
+
+
+" To find the highlight-group of text under the cursor -
+" Taken from :
+" https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
+nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
