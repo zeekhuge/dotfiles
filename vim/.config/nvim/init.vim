@@ -78,9 +78,17 @@ nnoremap <C-m> :CtrlPLine<CR>
 Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'sbdchd/neoformat'
+
 Plug 'scrooloose/nerdtree'
+let NERDTreeIgnore = ['\.pyc$']
+nnoremap -B :NERDTreeToggle<CR>
+nnoremap -BC :NERDTreeMirror<CR>
+" From https://github.com/powerman/vim-plugin-autosess/issues/6#issuecomment-392971851
+autocmd VimLeave * NERDTreeClose
+
 Plug 'vimlab/split-term.vim'
 Plug 'gcmt/taboo.vim'
+
 Plug 'majutsushi/tagbar'
 " Based on https://github.com/preservim/tagbar/wiki#typescript
 let g:tagbar_type_typescript = {
@@ -96,6 +104,15 @@ let g:tagbar_type_typescript = {
     \ 'm:members',
   \ ]
 \ }
+nnoremap -L :call ToggleTagbar()<CR>
+let g:tagbar_autoclose = 0
+let g:tagbar_left = 0
+let g:tagbar_compact = 1
+let g:tagbar_indent = 2
+let g:tagbar_show_linenumber = 1
+let g:tagbar_autoshowtag = 1
+let g:tagbar_sort = 0
+
 Plug 'vim-airline/vim-airline'
 "call airline#parts#define_function(
 "            \ 'gradle-running',
@@ -135,8 +152,15 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'flazz/vim-colorschemes'
 Plug 'easymotion/vim-easymotion'
-" Temporarily remove fugitive as it is causing errors
-"Plug 'tpope/vim-fugitive'
+if !exists("g:ideaVim")
+    map / <Plug>(easymotion-sn)
+    map <Leader>l <Plug>(easymotion-lineforward)
+    map <Leader>j <Plug>(easymotion-j)
+    map <Leader>k <Plug>(easymotion-k)
+    map <Leader>h <Plug>(easymotion-linebackward)
+    let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+endif
+
 Plug 'tommcdo/vim-lion'
 Plug 'kshenoy/vim-signature'
 Plug 'christoomey/vim-tmux-navigator'
@@ -221,6 +245,9 @@ xmap <leader>x  <Plug>(coc-convert-snippet)
 "            \'SignatureHelp': '<C-p>',
 "            \'FindCodeActions': '<C-o>',
 "            \}
+"autocmd InsertLeave,CompleteDone * silent! pclose
+"set shortmess-=F
+"let g:lsc_auto_completeopt       = 'menu,menuone,noinsert,preview'
 
 "Plug 'ycm-core/YouCompleteMe', {
 "            \'do': '~/.config/nvim/bundle/YouCompleteMe/install.py --java-completer --clangd-completer',
@@ -252,9 +279,6 @@ call plug#end()
 " Autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-" Closes previw window opened by vim-lsc
-autocmd InsertLeave,CompleteDone * silent! pclose
-
 " Older commands
 autocmd BufNewFile *.cpp :r! sed -n 'p' < ~/.snck/.cpp.template
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
@@ -283,10 +307,6 @@ fun! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfun
 
-" required by vim-lsc
-set shortmess-=F
-" vim-lsc overrides `completeopt` based on these settings
-let g:lsc_auto_completeopt       = 'menu,menuone,noinsert,preview'
 
 " gen_tags settings
 let g:gen_tags#statusline = 1
@@ -297,20 +317,7 @@ let g:vimwiki_list = [{'path':'~/vimwiki', 'syntax':'markdown', 'ext':'.wiki'}]
 "wiki.vim plugin
 let g:wiki_root = '/home/zeekhuge/Journals/'
 
-"NerdTree ignoring files
-let NERDTreeIgnore = ['\.pyc$']
 
-
-"easymotion settings. Set them only if this is not ideavim (Android studio vim
-"plugin)
-if !exists("g:ideaVim")
-    map / <Plug>(easymotion-sn)
-    map <Leader>l <Plug>(easymotion-lineforward)
-    map <Leader>j <Plug>(easymotion-j)
-    map <Leader>k <Plug>(easymotion-k)
-    map <Leader>h <Plug>(easymotion-linebackward)
-    let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
-endif
 
 " Journaling helpers
 
@@ -394,15 +401,6 @@ set splitright
 set splitbelow
 nnoremap -D :call ToggleTerm()<CR>
 
-" settings for taglist
-nnoremap -L :call ToggleTagbar()<CR>
-let g:tagbar_autoclose = 0
-let g:tagbar_left = 0
-let g:tagbar_compact = 1
-let g:tagbar_indent = 2
-let g:tagbar_show_linenumber = 1
-let g:tagbar_autoshowtag = 1
-let g:tagbar_sort = 0
 
 
 " mappings & settins for tagbar
@@ -634,9 +632,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-"To map nerd tree toggle command
-nnoremap -B :NERDTreeToggle<CR>
-nnoremap -BC :NERDTreeMirror<CR>
 
 "binding to input 'TIME TAKEN' and 'Relevant Issue' stamp
 nnoremap -TT iTIME TAKEN :   hours<ESC>7h i
