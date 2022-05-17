@@ -4,12 +4,12 @@
 [core]
 	editor = nvim +Comment
 	hooksPath = /home/zeekhuge/projects/aimed-labs/aimed-labs-dev-config/githooks
+	pager = less -x1,5
 [push]
 	default = current
 [diff]
 	tool = vimdiff
 [alias]
-	d = difftool -y
     graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
     #add-commit = "!f() { git add $(get_arg \"$@\" f) && git commit $(get_arg \"$@\" m); }; f"
     #add-commit = "! getFile() { echo $1 | sed 's/.*\s\+-f\s\+//' | sed 's/\s\+-.*//';} ; getCommit () { echo $1 | sed 's/.*\s\+-m\s\+//' | sed 's/\s\+-.*//' ;} ;getFile $@; "
@@ -19,6 +19,7 @@
         \
         f () { git add \"$@\" && git commit -v; }; \
         f"
+    d = diff --ignore-space-change
     l = log
     s = status
     lo = log --oneline
@@ -59,3 +60,5 @@
 	recurse = true
 [dude]
 	interval = 30
+[branch]
+	autoSetupMerge = always
